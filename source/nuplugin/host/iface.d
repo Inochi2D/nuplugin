@@ -22,6 +22,18 @@ interface IHost : IUnknown {
 extern(C) @nogc:
 
     /**
+        Gets whether the host has the given plugin loaded.
+
+        Params:
+            name = The namespace of the plugin.
+        
+        Returns:
+            $(D true) if the host's plugin list has the requested
+            plugin, $(D false) otherwise.
+    */
+    bool hasPlugin(string name);
+
+    /**
         Finds an object within the plugins, searched by namespace and name.
         Eg. `com.test.MyPlugin.SomeObject`, then tries to create an instance
         of it.

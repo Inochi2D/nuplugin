@@ -98,6 +98,26 @@ public:
     }
     
     /**
+        Gets whether the host has the given plugin loaded.
+
+        Params:
+            name = The namespace of the plugin.
+        
+        Returns:
+            $(D true) if the host's plugin list has the requested
+            plugin, $(D false) otherwise.
+    */
+    extern(C)
+    bool hasPlugin(string name) {
+        foreach(plugin; loaded[]) {
+            if (plugin.namespace == name)
+                return true;
+        }
+        
+        return false;
+    }
+    
+    /**
         Finds an object within the plugins, searched by namespace and name.
         Eg. `com.test.MyPlugin.SomeObject`, then tries to create an instance
         of it; casting it to the requested interface, if possible.
@@ -109,8 +129,8 @@ public:
             A reference to the PluginObject matching the given name,
             otherwise $(D null);
     */
-    pragma(inline, true)
     extern(C)
+    pragma(inline, true)
     T createObject(T)(string name) if (is(T : INuObject)) {
         if (auto pobj = this.createObject(name)) {
                 if (auto robj = pobj.query!T()) {
@@ -152,6 +172,13 @@ public:
             return plugin;
         }
         return null;
+    }
+
+    /**
+        Gets the IHost version of the host.
+    */
+    IHost toIHost() {
+        return cast(IHost)this;
     }
 }
 

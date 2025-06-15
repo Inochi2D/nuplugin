@@ -1,0 +1,9 @@
+
+# Junk Dub creates
+.dub/
+__dummy_docs/
+docs.json
+dub.selections.json
+
+# Outputs
+out/

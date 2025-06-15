@@ -1,0 +1,19 @@
+name "nuplugin"
+description "D plugin framework"
+authors "luna"
+copyright "Copyright © 2025, luna"
+license "BSL-1.0"
+
+dependency "nulib" version=">=0.3.1"
+dependency "numem" version=">=1.1.4"
+dependency "numem:hookset-libc" version="*"
+
+targetPath "out/"
+
+configuration "plugin" {
+    versions "IsPlugin"
+}
+
+configuration "host" {
+    versions "IsHost"
+}

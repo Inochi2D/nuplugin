@@ -1,0 +1,28 @@
+name "hello_world"
+authors "luna"
+copyright "Copyright © 2025, luna"
+license "BSL-1.0"
+
+targetPath "../../out/"
+workingDirectory "../../out/"
+
+dependency "nuplugin" path="../../"
+
+configuration "all" {
+    targetType "none"
+    preGenerateCommands "dub build --config=plugin"
+    preGenerateCommands "dub run --config=host"
+}
+
+configuration "host" {
+    targetType "executable"
+    subConfiguration "nuplugin" "host"
+
+    versions "Host"
+}
+
+configuration "plugin" {
+    targetType "dynamicLibrary"
+    subConfiguration "nuplugin" "plugin"
+    versions "Plugin"
+}
